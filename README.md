@@ -29,7 +29,7 @@ you will be amazed of how much space this tool can free for you!
 # How to use? 
 
 Just download "WindowsCleanerUtility.bat" or "WindowsCleanerUtility.exe" from [Releases](https://github.com/Chainski/WindowsCleanerUtility/releases) 
-and right click on it and select open.
+and right click on it and select run as administrator.
 Choose any option from the meun provided.
 
 NOT all of the files will be deleted! Some of them might be used by other processes. 
