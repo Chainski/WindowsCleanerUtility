@@ -97,7 +97,7 @@ if not exist * goto good-to-go
 echo [%date% %time%] PC needs deep cleaning >> WindowsCleanerUtility-Log.txt
 cls
 echo.
-echo Your PC needs deep cleaning! Check the list above and select the appropriate action.
+echo Your PC needs deep cleaning! Select an option below to continue.
 echo Press 1 to clear data and reclaim disk space.
 echo Press 2 to stop the current operations and exit the program.
 choice /c 12 /n
