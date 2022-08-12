@@ -5,7 +5,7 @@
 
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/96607632/184158630-e6555f84-9925-42ea-954c-bbc67de58a77.png", width="800", height="800">
+<img src="https://user-images.githubusercontent.com/96607632/184447495-532d549f-13cf-4764-b50a-f8d32ad56330.png", width="800", height="800">
 </p>
 
 # Windows Cleaner Utility 🧹
