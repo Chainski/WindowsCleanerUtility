@@ -22,7 +22,7 @@ you will be amazed of how much space this tool can free for you!
 - Deletes History
 - Deletes Cookies
 - Deletes Remnant Drivers Files (Not needed because already installed)
-- Resets Internal IP Address
+- Resets DNS Resolver Cache
 
 #### After Cleaning Process Script Will Enable [Ultimate-Performance Mode](https://chinotechtips.blogspot.com/2022/01/how-to-enable-ultimate-performance-mode.html)
 
