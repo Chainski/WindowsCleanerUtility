@@ -162,39 +162,6 @@ del /s /f /q %SYSTEMDRIVE%\NVIDIA\*.* >nul 2>nul
 del /s /f /q %SYSTEMDRIVE%\INTEL\*.* >nul 2>nul
 
 
-echo [Cleaning] Browser Cache Cache/Logs && color 6
-timeout /t 2 /nobreak >nul
-echo.
-
-REM Delete Browser Cache ( Microsoft Edge and Chrome)
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG.old" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data-journal" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media History" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media History-journal" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor-journal" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Persistent State" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Reporting and NEL" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Reporting and NEL-journal" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\QuotaManager" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\QuotaManager-journal" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Shortcuts" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Shortcuts-journal" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Top Sites" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Top Sites-journal" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Visited Links" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data" /s /f /q >nul 2>nul
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data-journal" /s /f /q >nul 2>nul
-del "%LocalAppData%\Google\Chrome\User Data\Default\Cache" /F /Q /S >nul 2>nul
-del "%LocalAppData%\Google\Chrome\User Data\Default\Media Cache" /F /Q /S >nul 2>nul
-del "%LocalAppData%\Google\Chrome\User Data\Default\GPUCache" /F /Q /S >nul 2>nul
-del "%LocalAppData%\Google\Chrome\User Data\Default\Storage\ext" /F /Q /S >nul 2>nul
-del "%LocalAppData%\Google\Chrome\User Data\Default\Service Worker" /F /Q /S >nul 2>nul
-del "%LocalAppData%\Google\Chrome\User Data\ShaderCache" /F /Q /S >nul 2>nul
-
 echo [Cleaning] Windows Defender Cache/Logs && color 3
 timeout /t 2 /nobreak >nul
 echo.
