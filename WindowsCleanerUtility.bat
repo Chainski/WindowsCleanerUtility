@@ -23,27 +23,19 @@ if '%errorlevel%' NEQ '0' (
     if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
     pushd "%CD%"
     CD /D "%~dp0"
-	
-echo [%date% %time%] Windows Cleaner Utility Launcher by Chainski Tools >> WindowsCleanerUtility-Log.txt
-echo [%date% %time%] Launching  Windows Cleaner Utility... >> WindowsCleanerUtility-Log.txt
+
 echo Windows Cleaner Utility Launcher by Chainski Tools
 goto int
 
 :int
 echo Loading configuration, please wait ...
 cls
-echo [%date% %time%] Loading configuration... >> WindowsCleanerUtility-Log.txt
 set VER=1.0.0
-echo [%date% %time%] Value Loaded: VER = %ver% >> WindowsCleanerUtility-Log.txt
 set dir=%temp%
 
 set github-link=https://github.com/Chainski/WindowsCleanerUtility
-echo [%date% %time%] Value Loaded: github-link = %github-link% >> WindowsCleanerUtility-Log.txt
 set license=GNU GENERAL PUBLIC LICENSE (version 3)
-echo [%date% %time%] Value Loaded: license = %license% >> WindowsCleanerUtility-Log.txt
 set license-file=LICENSE.txt
-echo [%date% %time%] Value Loaded: license-file = %license-file% >> WindowsCleanerUtility-Log.txt
-echo [%date% %time%] Windows Cleaner Utility Version Loaded: %ver% >> WindowsCleanerUtility-Log.txt
 timeout 1 /nul
 goto menu
 
@@ -63,30 +55,46 @@ echo                                          [40;33m ║    Windows Cleaner Ut
 echo                                          [40;33m ║    coded by Chainski Tools     ║                
 echo                                          [40;33m ╚════════════════════════════════╝    
 
-echo [%date% %time%] Windows Cleaner Utility succesfully launched >> WindowsCleanerUtility-Log.txt
 title Windows Cleaner Utility %ver% by Chainski Tools 
 echo.
-echo [40;32m Press a button from 1 to 4 - each of these buttons has its own function as described below:
+echo [40;32m Press a button from 1 to 5 - each of these buttons has its own function as described below:
 echo.
 echo  1 - Delete the Temporary Files
 echo.
-echo  2 - Program and license information
-echo  3 - Page on GitHub
+echo  2 - Scan System And Repair Windows Image
 echo.
-echo  4 - End session (will close the program)
-choice /c 1234 /n
+echo  3 - Program and license information
+echo.
+echo  4 - Page on GitHub
+echo.
+echo  5 - End session (will close the program)
+choice /c 12345 /n
 if %errorlevel%==1 goto clear-init
-if %errorlevel%==2 goto info
-if %errorlevel%==3 goto github
-if %errorlevel%==4 goto End
+if %errorlevel%==2 goto Repair
+if %errorlevel%==3 goto info
+if %errorlevel%==4 goto github
+if %errorlevel%==5 goto End
+
 
 :END
 cls
-echo [%date% %time%] Session Ended >> WindowsCleanerUtility-Log.txt
 exit
 
+:Repair
+cls
+sfc /scannow
+DISM /Online /Cleanup-Image /CheckHealth
+DISM /Online /Cleanup-Image /ScanHealth
+DISM /Online /Cleanup-Image /RestoreHealth
+cls
+echo Windows Repaired Successfully!
+echo --------------------------------------------------
+echo Press ENTER KEY yo Continue.
+echo --------------------------------------------------
+pause >nul
+goto menu
+
 :clear-init
-echo [%date% %time%] Preparing... >> WindowsCleanerUtility-Log.txt
 cls
 echo Checking Temporary Files...
 cd %temp%
@@ -94,56 +102,136 @@ if exist * goto clear-warning
 if not exist * goto good-to-go
 
 :clear-warning
-echo [%date% %time%] PC needs deep cleaning >> WindowsCleanerUtility-Log.txt
 cls
 echo.
 echo Your PC needs deep cleaning! Select an option below to continue.
-echo Press 1 to clear data and reclaim disk space.
+echo.
+echo Press 1 to clear data and reclaim disk space. (This process make several minutes please be patient)
 echo Press 2 to stop the current operations and exit the program.
 choice /c 12 /n
 if %errorlevel%==1 goto clear
 if %errorlevel%==2 exit
 
 :clear
-
 rem Delete Temporary Files
-echo [%date% %time%] Cleaning... >> WindowsCleanerUtility-Log.txt
-RMDIR "%tmp%" /S /Q
-del /s /f /q %temp%\*.*
+
+RMDIR "%tmp%" /S /Q >nul 2>nul
+del /s /f /q %temp%\*.* >nul 2>nul
 cleanmgr.exe /autoclean :: Used to delete old files left after upgrading a Windows build
-del /s /f /q %windir%\temp\*.*
-del /s /f /q %windir%\Prefetch\*.*
-del /s /f /q %LOCALAPPDATA%\Microsoft\Windows\Caches\*.*
-del /s /f /q %windir%\SoftwareDistribution\Download\*.*
-del /s /f /q %programdata%\Microsoft\Windows\WER\Temp\*.*
-del /s /f /q %HomePath%\AppData\LocalLow\Temp\*.*
+del /s /f /q %windir%\temp\*.* >nul 2>nul
+cls
+
+echo [Cleaning] and Optimizations in progress...
+timeout /t 2 /nobreak >nul
+echo.
+
+echo [Cleaning] Temporary Files && color c
+timeout /t 2 /nobreak >nul
+echo.
+
+del /s /f /q %windir%\temp\*.* >nul 2>nul
+del /s /f /q %windir%\Prefetch\*.* >nul 2>nul
+del /s /f /q %LOCALAPPDATA%\Microsoft\Windows\Caches\*.* >nul 2>nul
+del /s /f /q %windir%\SoftwareDistribution\Download\*.* >nul 2>nul
+del /s /f /q %programdata%\Microsoft\Windows\WER\Temp\*.* >nul 2>nul
+del /s /f /q %HomePath%\AppData\LocalLow\Temp\*.* >nul 2>nul
 rd /s /f /q %windir%\history 2>nul >nul
 rd /s /f /q %windir%\cookies 2>nul >nul
-cls
+
+
+echo [Cleaning] Log Files && color b 
+timeout /t 2 /nobreak >nul
+echo.
 
 REM Delete Log Files
-del /s /f /q %windir%\Logs\CBS\CbsPersist*.log
-del /s /f /q %windir%\Logs\MoSetup\*.log
-del /s /f /q %windir%\Panther\*.log 
-del /s /f /q %windir%\logs\*.log
-del /s /f /q %localappdata%\Microsoft\Windows\WebCache\*.log 
-rd /s /f /q %localappdata%\Microsoft\Windows\INetCache\*.log 
-cls
+del /s /f /q %windir%\Logs\CBS\CbsPersist*.log >nul 2>nul
+del /s /f /q %windir%\Logs\MoSetup\*.log >nul 2>nul
+del /s /f /q %windir%\Panther\*.log >nul 2>nul
+del /s /f /q %windir%\logs\*.log >nul 2>nul
+del /s /f /q %localappdata%\Microsoft\Windows\WebCache\*.log >nul 2>nul
+rd /s /f /q %localappdata%\Microsoft\Windows\INetCache\*.log >nul 2>nul
 
-rem Delete Remnant Drivers Files (Not needed because already installed)
-del /s /f /q %SYSTEMDRIVE%\AMD\*.*
-del /s /f /q %SYSTEMDRIVE%\NVIDIA\*.*
-del /s /f /q %SYSTEMDRIVE%\INTEL\*.*
-cls
 
-REM Delete Browser Cache 
-del /s /f /q "%USERPROFILE%\AppData\Local\Microsoft\Edge\User Data\Default\Cache" 
+echo [Cleaning] Remnant Driver Files && color 9
+timeout /t 2 /nobreak >nul
+echo.
+
+rem Delete Remnant Driver Files (Not needed because already installed)
+del /s /f /q %SYSTEMDRIVE%\AMD\*.* >nul 2>nul
+del /s /f /q %SYSTEMDRIVE%\NVIDIA\*.* >nul 2>nul
+del /s /f /q %SYSTEMDRIVE%\INTEL\*.* >nul 2>nul
+
+
+echo [Cleaning] Browser Cache Cache/Logs && color 6
+timeout /t 2 /nobreak >nul
+echo.
+
+REM Delete Browser Cache ( Microsoft Edge and Chrome)
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG.old" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data-journal" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media History" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media History-journal" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor-journal" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Persistent State" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Reporting and NEL" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Reporting and NEL-journal" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\QuotaManager" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\QuotaManager-journal" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Shortcuts" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Shortcuts-journal" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Top Sites" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Top Sites-journal" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Visited Links" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data" /s /f /q >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data-journal" /s /f /q >nul 2>nul
+del "%LocalAppData%\Google\Chrome\User Data\Default\Cache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Google\Chrome\User Data\Default\Media Cache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Google\Chrome\User Data\Default\GPUCache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Google\Chrome\User Data\Default\Storage\ext" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Google\Chrome\User Data\Default\Service Worker" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Google\Chrome\User Data\ShaderCache" /F /Q /S >nul 2>nul
+
+echo [Cleaning] Windows Defender Cache/Logs && color 3
+timeout /t 2 /nobreak >nul
+echo.
+
+del "%ProgramData%\Microsoft\Windows Defender\Network Inspection System\Support\*.log" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Scans\History\CacheManager" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Scans\History\ReportLatency\Latency" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Service\*.log" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Scans\MetaStore" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Support" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Quick" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Resource" /F /Q /S >nul 2>nul
+
+echo [Cleaning] DNS Resolver Cache && color 2
+timeout /t 2 /nobreak >nul
+echo.
 
 REM Clean DNS Resolver Cache (Restart May Be Required)
-ipconfig /flushdns
-cls
-netsh winsock reset all
-cls
+ipconfig /release >nul 2>nul
+ipconfig /renew >nul 2>nul
+ipconfig /flushdns >nul 2>nul
+netsh int ip reset >nul 2>nul
+netsh winsock reset >nul 2>nul
+netsh interface ipv4 reset >nul 2>nul
+netsh interface ipv6 reset >nul 2>nul
+
+echo [Enabling] Ultimate Performance Mode && color b 
+timeout /t 2 /nobreak >nul
+echo.
+
+echo Successfully Enabled Ultimate Performance Mode ! && color c
+timeout /t 2 /nobreak >nul
+echo.
+
+::Enables Ultimate Performance
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 95533644-e700-4a79-a56c-a89e8cb109d9 >nul 2>nul
+powercfg -setactive 95533644-e700-4a79-a56c-a89e8cb109d9 >nul 2>nul
 
 :clear-error
 echo Unfortunately, we were unable to remove all of the Temporary files (some are being used by other processes).
@@ -155,19 +243,16 @@ choice /c 12 /n
 if %errorlevel%==1 goto clear
 if %errorlevel%==2 goto menu
 
-echo Reclaiming disk space, please wait (this process may take some time) ...
 if exist * goto clear-error
 if not exist * goto clear-complete
 
 :clear-complete
-echo [%date% %time%] Requested operations completed. >> WindowsCleanerUtility-Log.txt
 cls
 echo Ready! Your computer has been cleared of unnecessary temporary data!
 pause
 goto menu
 
 :good-to-go
-echo [%date% %time%] Requested operations completed. >> WindowsCleanerUtility-Log.txt
 cls
 echo Your PC doesn't need cleaning. Your PC is good to go!
 pause
