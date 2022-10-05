@@ -221,7 +221,7 @@ goto menu
 
 :good-to-go
 cls
-echo Your PC doesn't need cleaning. Your PC is good to go!
+echo Your PC doesn't need any cleaning. Your PC is good to go!
 pause
 goto menu
 
