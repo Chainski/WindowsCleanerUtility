@@ -2,6 +2,7 @@
 <a href="https://github.com/chainski/WindowsCleanerUtility"><img src="https://img.shields.io/badge/license-GPL--3.0-orange"></a> 
 <a href="https://github.com/chainski/WindowsCleanerUtility/releases"><img src="https://img.shields.io/badge/release-v1.0.0-red"></a> 
 <a href="https://github.com/chainski/WindowsCleanerUtility"><img src="https://img.shields.io/badge/BATCH-FILE-green"></a> 
+<a href="https://github.com/chainski/WindowsCleanerUtility/releases"><img src="https://img.shields.io/badge/dynamic/json?label=Visitors&query=value&url=https%3A%2F%2Fapi.countapi.xyz%2Fhit%2FChainski%2FWindowsCleanerUtility"></a> 
 
 
 <p align="center">
