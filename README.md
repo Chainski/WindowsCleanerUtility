@@ -24,12 +24,12 @@ you will be amazed of how much space this tool can free for you!
 
 # What does this tool delete exactly? 
 
-- Deletes Temporary Files
-- Deletes Log Files
-- Deletes History
-- Deletes Cookies
-- Deletes Remnant Drivers Files (Not needed because already installed)
-- Resets DNS Resolver Cache
+- [x] Deletes Temporary Files
+- [x] Deletes Log Files
+- [x] Deletes History
+- [x] Deletes Cookies
+- [x] Deletes Remnant Drivers Files (Not needed because already installed)
+- [x] Resets DNS Resolver Cache
 
 #### After Cleaning Process Script Will Enable [Ultimate-Performance Mode](https://chinotechtips.blogspot.com/2022/01/how-to-enable-ultimate-performance-mode.html)
 
