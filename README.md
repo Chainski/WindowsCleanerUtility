@@ -31,7 +31,7 @@ you will be amazed of how much space this tool can free for you!
 - [x] Deletes Remnant Drivers Files (Not needed because already installed)
 - [x] Resets DNS Resolver Cache
 
-#### After Cleaning Process Script Will Enable [Ultimate-Performance Mode](https://chinotechtips.blogspot.com/2022/01/how-to-enable-ultimate-performance-mode.html)
+#### After Cleaning Process Script Will Enable [Ultimate Performance Mode](https://www.makeuseof.com/how-to-enable-ultimate-performance-power-plan/)
 
 
 # How to use? 
