@@ -22,10 +22,14 @@ A windows batch script that cleans your PC from temporary files.
 If you've been a windows user for a long time without cleaning it up, or you don't know how to clean it, 
 you will be amazed of how much space this tool can free for you!
 
-# What does this tool delete exactly? 
+ ## ⚡ Features
 
+- [x] System File Checker
 - [x] Deletes Temporary Files
 - [x] Deletes Log Files
+- [x] Deletes Event Logs
+- [x] Deletes Old Files
+- [x] Deletes Trace Files 
 - [x] Deletes History
 - [x] Deletes Cookies
 - [x] Deletes Remnant Drivers Files (Not needed because already installed)
@@ -36,7 +40,7 @@ you will be amazed of how much space this tool can free for you!
 
 # How to use? 
 
-Just download "WindowsCleanerUtility.bat" or "WindowsCleanerUtility-x86_64.exe" from [Releases](https://github.com/Chainski/WindowsCleanerUtility/releases) 
+Just download ```WindowsCleanerUtility.bat``` from [Releases](https://github.com/Chainski/WindowsCleanerUtility/releases) 
 and right click on it and select run as administrator.
 Choose any option from the menu provided.
 
