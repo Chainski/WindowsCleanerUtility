@@ -129,12 +129,16 @@ echo [Cleaning] Temporary Files && color c
 timeout /t 2 /nobreak >nul
 echo.
 
+:: Empties the RecycleBin
+del /s /q /f  %systemdrive%\$Recycle.bin\* >nul 2>nul
+
 del /s /f /q %windir%\temp\*.* >nul 2>nul
 del /s /f /q %windir%\Prefetch\*.* >nul 2>nul
 del /s /f /q %LOCALAPPDATA%\Microsoft\Windows\Caches\*.* >nul 2>nul
 del /s /f /q %windir%\SoftwareDistribution\Download\*.* >nul 2>nul
 del /s /f /q %programdata%\Microsoft\Windows\WER\Temp\*.* >nul 2>nul
 del /s /f /q %HomePath%\AppData\LocalLow\Temp\*.* >nul 2>nul
+del /f /s /q %systemdrive%\*.tmp 2>nul >nul
 rd /s /f /q %windir%\history 2>nul >nul
 rd /s /f /q %windir%\cookies 2>nul >nul
 
@@ -144,6 +148,10 @@ timeout /t 2 /nobreak >nul
 echo.
 
 REM Delete Log Files
+del /f /s /q %systemdrive%\*.log >nul 2>nul
+del /f /s /q %systemdrive%\*.old >nul 2>nul
+del /f /s /q %systemdrive%\*.trace >nul 2>nul
+del /f /s /q %windir%\*.bak >nul 2>nul
 del /s /f /q %windir%\Logs\CBS\CbsPersist*.log >nul 2>nul
 del /s /f /q %windir%\Logs\MoSetup\*.log >nul 2>nul
 del /s /f /q %windir%\Panther\*.log >nul 2>nul
@@ -151,6 +159,10 @@ del /s /f /q %windir%\logs\*.log >nul 2>nul
 del /s /f /q %localappdata%\Microsoft\Windows\WebCache\*.log >nul 2>nul
 rd /s /f /q %localappdata%\Microsoft\Windows\INetCache\*.log >nul 2>nul
 
+
+:: Remove Event Logs.
+wevtutil.exe cl Application
+wevtutil.exe cl System
 
 echo [Cleaning] Remnant Driver Files && color 9
 timeout /t 2 /nobreak >nul
